@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const blowfish = document.getElementById("blowfish");
+    const blowfishElements = document.querySelectorAll(".blowfish");
 
-    blowfish.addEventListener("mouseover", () => {
-        blowfish.style.transform = "scale(1.2)";
-    });
+    blowfishElements.forEach((blowfish) => {
+        blowfish.addEventListener("mouseover", () => {
+            blowfish.style.transform = "scale(1.3)";
+        });
 
-    blowfish.addEventListener("mouseout", () => {
-        blowfish.style.transform = "scale(1)";
+        blowfish.addEventListener("mouseout", () => {
+            blowfish.style.transform = "scale(1)";
+        });
     });
 });
