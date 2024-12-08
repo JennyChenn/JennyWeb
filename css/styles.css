@@ -27,9 +27,35 @@ nav ul li a {
     color: #333;
 }
 
+/* Animated Background */
 section {
-    padding: 20px;
+    position: relative;
+    padding: 50px 20px;
     margin: 20px 0;
+    color: #fff;
+    overflow: hidden;
+}
+
+section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(120deg, #81d4fa 25%, #b3e5fc 50%, #81d4fa 75%);
+    animation: move-stripes 8s linear infinite;
+    z-index: -1;
+    transform: rotate(45deg);
+}
+
+@keyframes move-stripes {
+    0% {
+        transform: translateX(0) rotate(45deg);
+    }
+    100% {
+        transform: translateX(-50%) rotate(45deg);
+    }
 }
 
 /* Experience Section */
@@ -38,12 +64,10 @@ section {
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    padding: 20px;
 }
 
 .experience-block {
-    background-color: #fefefe;
-    border: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     width: 300px;
@@ -69,52 +93,12 @@ section {
     margin: 10px 0;
 }
 
-/* Floating Blowfish Animation */
-.blowfish-container {
-    position: relative;
-    height: 400px;
-    overflow: hidden;
-    background: linear-gradient(to bottom, #b3e5fc, #81d4fa);
+.experience-block p {
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #333;
 }
 
-.blowfish {
-    position: absolute;
-    width: 100px;
-    animation: float 10s infinite ease-in-out, drift 6s infinite linear;
-}
-
-#blowfish1 {
-    top: 50px;
-    left: 10%;
-    animation-delay: 0s;
-}
-
-#blowfish2 {
-    top: 150px;
-    left: 50%;
-    animation-delay: 2s;
-}
-
-#blowfish3 {
-    top: 250px;
-    left: 80%;
-    animation-delay: 4s;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-30px);
-    }
-}
-
-@keyframes drift {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-20px);
-    }
+.experience-block strong {
+    color: #555;
 }
