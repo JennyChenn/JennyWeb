@@ -3,10 +3,10 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f8ff;
     text-align: center;
 }
 
+/* Header */
 header {
     background-color: #ffdd57;
     padding: 20px;
@@ -44,7 +44,7 @@ section::before {
     width: 200%;
     height: 200%;
     background: linear-gradient(120deg, #81d4fa 25%, #b3e5fc 50%, #81d4fa 75%);
-    animation: move-stripes 8s linear infinite;
+    animation: move-stripes 10s linear infinite;
     z-index: -1;
     transform: rotate(45deg);
 }
@@ -86,19 +86,4 @@ section::before {
     height: 80px;
     border-radius: 50%;
     margin-bottom: 10px;
-}
-
-.experience-block h3 {
-    font-size: 1.5em;
-    margin: 10px 0;
-}
-
-.experience-block p {
-    font-size: 0.9em;
-    line-height: 1.5;
-    color: #333;
-}
-
-.experience-block strong {
-    color: #555;
 }
