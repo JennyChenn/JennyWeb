@@ -3,38 +3,47 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    text-align: center;
-    position: relative;
+    color: #ffffff;
+    background: #1c1f26; /* Dark theme background */
+    overflow-x: hidden;
 }
 
-/* Floating Shark Animation */
+/* Background Animation */
 body::before {
     content: "";
     position: fixed;
-    top: 10%;
-    left: -10%;
-    width: 200px;
-    height: 200px;
-    background: url('https://raw.githubusercontent.com/your-username/your-repo/main/shark.png') no-repeat center center / contain;
-    animation: float 8s infinite ease-in-out;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(81, 135, 200, 0.1),
+        rgba(81, 135, 200, 0.1) 10px,
+        rgba(81, 135, 200, 0.2) 10px,
+        rgba(81, 135, 200, 0.2) 20px
+    );
+    animation: diagonal-stripes 8s infinite linear;
     z-index: -1;
 }
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
+@keyframes diagonal-stripes {
+    0% {
+        transform: translateX(0) translateY(0);
     }
-    50% {
-        transform: translateY(-20px);
+    100% {
+        transform: translateX(-20px) translateY(-20px);
     }
 }
 
 /* Header */
 header {
-    background-color: #ffdd57;
+    background-color: #263238; /* Darker shade for header */
     padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* Navigation */
 nav ul {
     list-style: none;
     padding: 0;
@@ -47,7 +56,7 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #333;
+    color: #81d4fa;
 }
 
 /* About Me Section */
@@ -56,7 +65,8 @@ nav ul li a {
     justify-content: center;
     align-items: center;
     gap: 20px;
-    margin: 20px;
+    margin: 50px auto;
+    max-width: 900px;
 }
 
 .profile-pic {
@@ -64,12 +74,11 @@ nav ul li a {
     height: 200px;
     border-radius: 50%;
     border: 5px solid #81d4fa;
-    background: linear-gradient(45deg, #81d4fa, #b3e5fc);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #1c1f26, #81d4fa);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .about-text {
-    max-width: 600px;
     text-align: left;
 }
 
@@ -82,19 +91,39 @@ nav ul li a {
 }
 
 .experience-block {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #2b303b; /* Darker card background */
     border-radius: 15px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    width: 300px;
     padding: 20px;
-    text-align: center;
+    width: 300px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .experience-block:hover {
     transform: translateY(-5px);
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
 }
 
 .experience-block img {
-   
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* Language Bubbles */
+.language-bubbles {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.language-bubbles span {
+    background: #81d4fa;
+    color: #1c1f26;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
