@@ -9,88 +9,75 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.width = button.offsetWidth + 100;
         canvas.height = button.offsetHeight + 100;
 
-        let points = [];
-        const pointsCount = 8;
+        const points = [];
         const viscosity = 20;
-        const mouseDist = 70;
-        const damping = 0.05;
+        const damping = 0.1;
 
-        const relMouse = { x: 0, y: 0 };
-        const mouseSpeed = { x: 0, y: 0 };
+        for (let i = 0; i < 8; i++) {
+            const angle = (i / 8) * (Math.PI * 2);
+            const x = Math.cos(angle) * (canvas.width / 2) + canvas.width / 2;
+            const y = Math.sin(angle) * (canvas.height / 2) + canvas.height / 2;
 
-        function createPoints() {
-            points = [];
-            const xStart = canvas.height / 2;
-            for (let i = 1; i < pointsCount; i++) {
-                points.push(new Point(xStart + ((canvas.width - canvas.height) / pointsCount) * i, 0));
-            }
-            points.push(new Point(canvas.width, canvas.height / 2));
-            points.push(new Point(canvas.width - canvas.height / 5, canvas.height));
-            points.push(new Point(xStart, canvas.height));
-            points.push(new Point(-canvas.height / 10, canvas.height / 2));
+            points.push({
+                x: x,
+                y: y,
+                originX: x,
+                originY: y,
+                vx: 0,
+                vy: 0,
+            });
         }
 
-        function Point(x, y) {
-            this.x = this.ix = x;
-            this.y = this.iy = y;
-            this.vx = 0;
-            this.vy = 0;
+        function updatePoints(mouseX, mouseY) {
+            points.forEach(point => {
+                const dx = point.originX - mouseX;
+                const dy = point.originY - mouseY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 100) {
+                    const force = (100 - distance) / 100;
+                    point.vx += force * (dx / distance) * 2;
+                    point.vy += force * (dy / distance) * 2;
+                }
+
+                point.vx *= (1 - damping);
+                point.vy *= (1 - damping);
+
+                point.x += point.vx;
+                point.y += point.vy;
+            });
         }
 
-        Point.prototype.move = function () {
-            this.vx += (this.ix - this.x) / viscosity;
-            this.vy += (this.iy - this.y) / viscosity;
-
-            const dx = this.ix - relMouse.x;
-            const dy = this.iy - relMouse.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            if (distance < mouseDist) {
-                const force = (1 - (distance / mouseDist)) * 2;
-                this.vx += mouseSpeed.x * force;
-                this.vy += mouseSpeed.y * force;
-            }
-
-            this.vx *= 1 - damping;
-            this.vy *= 1 - damping;
-
-            this.x += this.vx;
-            this.y += this.vy;
-        };
-
-        function updateCanvas() {
+        function renderCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = button.style.background || '#81d4fa';
-
             ctx.beginPath();
             ctx.moveTo(points[0].x, points[0].y);
 
-            for (let i = 0; i < points.length; i++) {
-                const next = points[i + 1] || points[0];
-                const cx = (points[i].x + next.x) / 2;
-                const cy = (points[i].y + next.y) / 2;
-                ctx.quadraticCurveTo(points[i].x, points[i].y, cx, cy);
+            for (let i = 1; i < points.length; i++) {
+                const point = points[i];
+                const nextPoint = points[i + 1] || points[0];
+                const cx = (point.x + nextPoint.x) / 2;
+                const cy = (point.y + nextPoint.y) / 2;
+
+                ctx.quadraticCurveTo(point.x, point.y, cx, cy);
             }
 
             ctx.closePath();
+            ctx.fillStyle = button.style.background || '#81d4fa';
             ctx.fill();
-
-            points.forEach(point => point.move());
-
-            requestAnimationFrame(updateCanvas);
         }
 
-        function handleMouseMove(event) {
+        function animate(mouseX, mouseY) {
+            updatePoints(mouseX, mouseY);
+            renderCanvas();
+            requestAnimationFrame(() => animate(mouseX, mouseY));
+        }
+
+        canvas.addEventListener('mousemove', e => {
             const rect = canvas.getBoundingClientRect();
-            relMouse.x = event.clientX - rect.left;
-            relMouse.y = event.clientY - rect.top;
+            animate(e.clientX - rect.left, e.clientY - rect.top);
+        });
 
-            mouseSpeed.x = (event.movementX || 0) / 2;
-            mouseSpeed.y = (event.movementY || 0) / 2;
-        }
-
-        createPoints();
-        updateCanvas();
-        button.addEventListener('mousemove', handleMouseMove);
+        animate(0, 0);
     });
 });
