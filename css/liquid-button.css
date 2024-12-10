@@ -1,35 +1,36 @@
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 .btn-liquid {
     display: inline-block;
     position: relative;
-    width: 150px;
-    height: 50px;
-    border-radius: 25px;
+    width: 200px;
+    height: 60px;
+    border-radius: 30px;
     background: linear-gradient(90deg, #81d4fa, #4fc3f7, #0288d1);
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
-    letter-spacing: 0.05em;
     color: #fff;
     text-decoration: none;
     overflow: hidden;
-}
-
-.btn-liquid:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
 }
 
 .btn-liquid .inner {
     position: relative;
     z-index: 2;
-    line-height: 50px;
+    line-height: 60px;
 }
 
 .btn-liquid canvas {
     position: absolute;
     top: -50px;
     left: -50px;
-    width: 250%;
-    height: 250%;
+    width: 300%;
+    height: 300%;
     z-index: 1;
 }
