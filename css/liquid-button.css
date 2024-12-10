@@ -1,47 +1,35 @@
-body {
-    display: flex;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    background-color: #1c1f26;
-}
-
 .btn-liquid {
     display: inline-block;
     position: relative;
-    width: 200px;
-    height: 60px;
-    border-radius: 30px;
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
     background: linear-gradient(90deg, #81d4fa, #4fc3f7, #0288d1);
     text-align: center;
-    text-transform: uppercase;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: bold;
     letter-spacing: 0.05em;
-    text-decoration: none;
     color: #fff;
+    text-decoration: none;
     overflow: hidden;
-    transition: all 0.3s ease;
-    z-index: 1;
 }
 
 .btn-liquid:hover {
-    transform: scale(1.1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .btn-liquid .inner {
     position: relative;
     z-index: 2;
-    line-height: 60px;
+    line-height: 50px;
 }
 
 .btn-liquid canvas {
     position: absolute;
     top: -50px;
-    right: -50px;
-    bottom: -50px;
     left: -50px;
+    width: 250%;
+    height: 250%;
     z-index: 1;
 }
