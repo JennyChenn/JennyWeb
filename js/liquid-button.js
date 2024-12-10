@@ -24,15 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
             for (let i = 1; i < pointsCount; i++) {
                 points.push(new Point(xStart + ((canvas.width - canvas.height) / pointsCount) * i, 0));
             }
-            points.push(new Point(canvas.width - canvas.height / 5, 0));
-            points.push(new Point(canvas.width + canvas.height / 10, canvas.height / 2));
+            points.push(new Point(canvas.width, canvas.height / 2));
             points.push(new Point(canvas.width - canvas.height / 5, canvas.height));
-            for (let i = pointsCount - 1; i > 0; i--) {
-                points.push(new Point(xStart + ((canvas.width - canvas.height) / pointsCount) * i, canvas.height));
-            }
-            points.push(new Point(canvas.height / 5, canvas.height));
+            points.push(new Point(xStart, canvas.height));
             points.push(new Point(-canvas.height / 10, canvas.height / 2));
-            points.push(new Point(canvas.height / 5, 0));
         }
 
         function Point(x, y) {
